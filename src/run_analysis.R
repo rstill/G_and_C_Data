@@ -239,7 +239,7 @@ output_data <- function(dir, name, data) {
 	file_path <- file.path(dir, name)
 
 	# Write the data set to the file
-	write.table(data, file_path)
+	write.table(data, file_path, row.name=FALSE)
 
 	# Return the path to the file
 	file_path
