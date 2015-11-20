@@ -1,4 +1,4 @@
-# Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset
+## Code book for the data derived from the UCI HAR Dataset
 * __activity__: The activity being conducted when the observation was made.
 
 * __subject__: The subject conducting the activity when the observation was made.

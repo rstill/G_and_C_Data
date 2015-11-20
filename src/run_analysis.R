@@ -215,7 +215,7 @@ tidy_data <- function(data, labels) {
 # 	A data table containing the variable name and descriptions. 
 ###################################################################
 generate_code_book <- function(features) {
-	code_book <- c("# Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset",
+	code_book <- c("## Code book for the data derived from the UCI HAR Dataset",
 			   	   "* __activity__: The activity being conducted when the observation was made.\n", 
 			       "* __subject__: The subject conducting the activity when the observation was made.\n")
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
