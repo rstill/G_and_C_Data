@@ -216,10 +216,10 @@ tidy_data <- function(data, labels) {
 ###################################################################
 generate_code_book <- function(features) {
 	code_book <- c("# Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset",
-			   	   "* _activity_: The activity being conducted when the observation was made.\n", 
-			       "* _subject_: The subject conducting the activity when the observation was made.\n")
+			   	   "* __activity__: The activity being conducted when the observation was made.\n", 
+			       "* __subject__: The subject conducting the activity when the observation was made.\n")
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
-	codes <- sapply(features[indices], function(feature) { sprintf("* _%s_: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	codes <- sapply(features[indices], function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
 
 }
