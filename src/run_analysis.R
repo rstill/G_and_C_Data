@@ -53,7 +53,7 @@ FEATURES <- "features.txt"
 LABELS <- "activity_labels.txt"
 
 # Name of code book file
-CODE_BOOK_FILE <- "code_book.md"
+CODE_BOOK_FILE <- "CodeBook.md"
 
 # Directory where the tidy dataset should be output.
 # Change this variable to move resulting tidy data set 
@@ -137,16 +137,16 @@ read_labels <- function(path) {
 #	train data set. The returned data table has all columns 
 #	appropriately labeled. 
 ###################################################################
-merge_data <- function (path, features) {
+merge_data <- function (path, labels) {
 	# Merge the files containing the training data into a single data frame.
 	raw_data <- lapply(TRAIN_DATA, function (file_name) { read.table(file.path(path, TRAIN_DIR, file_name)) })
 	train_data <- data.table(raw_data[[1]], raw_data[[2]], raw_data[[3]])
-	colnames(train_data) <- c("activity", "subject", features)
+	colnames(train_data) <- c("activity", "subject", labels$features)
 	
 	# Merge the files containing the train data into a single data frame
 	raw_data <- lapply(TEST_DATA, function (file_name) { read.table(file.path(path, TEST_DIR, file_name)) })
 	test_data <- data.table(raw_data[[1]], raw_data[[2]], raw_data[[3]])
-	colnames(test_data) <- c("activity", "subject", features)
+	colnames(test_data) <- c("activity", "subject", labels$features)
 	
 	# Merge the these data frames into a single data frame containing all data from both sets.
 	merged_data <- bind_rows(train_data, test_data)
@@ -171,12 +171,12 @@ merge_data <- function (path, features) {
 # 	A single data table containing the activities, the subjects, 
 #	and only those features columns related to mean() or std(). 
 ###################################################################
-extract_data <- function (data, features) {
+extract_data <- function (data, labels) {
 	# Determine those features that are related to mean() or std()
-	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))	
+	indices <- sort(c(grep("-mean()", labels$features, fixed=TRUE), grep("-std()", labels$features, fixed=TRUE)))	
 
 	# Extract those features, along with the activity and subject
-	data[,c("activity", "subject", features[indices])]
+	data[,c("activity", "subject", labels$features[indices])]
 }
 
 ###################################################################
@@ -215,11 +215,12 @@ tidy_data <- function(data, labels) {
 # 	A data table containing the variable name and descriptions. 
 ###################################################################
 generate_code_book <- function(features) {
-	code_book <- c("## Code book for the data derived from the UCI HAR Dataset",
+	code_book <- c("## Code book for the data derived from the UCI HAR Dataset.",
+				   "#### _This data presented has been created by merging the data from the test and train data sets, extracting all mean and standard deviation related features, summarized, and filnally output with readable activity labels._",
 				   "#### _Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation._",
 				   "#### _The columns for each observation are as follows._",
-			   	   "* __activity__: The activity being conducted when the observation was made.\n", 
-			       "* __subject__: The subject conducting the activity when the observation was made.\n")
+			   	   "* __activity__: The activity being conducted when the observation was made.", 
+			       "* __subject__: The subject conducting the activity when the observation was made.")
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
 	codes <- sapply(features[indices], function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
@@ -279,10 +280,10 @@ run_analysis <- function () {
 	labels <- read_labels(path)
 
 	# Merge the test and train data sets
-	merged_data <- merge_data(path, labels$features)
+	merged_data <- merge_data(path, labels)
 
 	# Extract the column related to mean() and std()
-	extracted_data <- extract_data(merged_data, labels$features)
+	extracted_data <- extract_data(merged_data, labels)
 
 	# Tidy the data by computing means, assigning column names, 
 	# and labeling activities with meaningful labels.
