@@ -16,25 +16,6 @@
 # Good luck!
 ############################################################################################
 
-############################################################################################
-# HOW THIS SCRIPT WORKS
-# 
-# Per the course instructions, this script, from the test and train data sets, creates a 
-# single, tidy data set, containing the avearge of each extracted variable for each activity 
-# and each subject. It accomplished this bby doing the following. 
-# 1. The dataset is downloaded and unzipped by the function download_data(). Directories are
-#	 created as needed.
-# 2. The feature names and activity labels are read from the code book files via the function 
-#	 read_code_book().
-# 3. The train and test dataset files are loaded and merged into a single data table via the
-#	 function merge_date(). 
-# 4. The function extract_Data(0 is used to create a data table containing only those 
-#	 features from the code book that are related to mean() or std(). 
-# 5. The resulting data table is summarised, and activity labels are applied via the 
-#    function tidy_data().
-# 6. This resulting data set is then written to a file by the function output_data().
-############################################################################################
-
 # Load relevant libraries
 library(data.table)
 library(dplyr)
@@ -42,7 +23,9 @@ library(dplyr)
 # Url of the dataset 
 DATA_URL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 
-# Directory to which the dataset should be downloaded
+# Directory to which the dataset should be downloaded. 
+# Change this variable to move the downloaded data set 
+# to another location.
 DATA_DIR <- "../data"
 
 # Name of the file to which the downloaded data should be saved
@@ -57,7 +40,7 @@ TEST_DIR <- "test"
 # Subdirectory containing unzipped train data set
 TRAIN_DIR <- "train"
 
-# Files contaiing the training data
+# Files containing the training data
 TRAIN_DATA <- c("y_train.txt", "subject_train.txt", "X_train.txt")
 
 # Files containing the test data
@@ -69,8 +52,13 @@ FEATURES <- "features.txt"
 # File containing the activity labels
 LABELS <- "activity_labels.txt"
 
-# Directory where the tidy dataset should be output
-OUTPUT_DIR <- "../output"
+# Name of code book file
+CODE_BOOK_FILE <- "code_book.md"
+
+# Directory where the tidy dataset should be output.
+# Change this variable to move resulting tidy data set 
+# and code book to another location.
+OUTPUT_DIR <- "."
 
  # Tidy data output file name
 OUTPUT_FILE <- "tidy.txt"
@@ -109,7 +97,7 @@ download_data <- function (url, dir, file=DEST_FILE) {
 
 ###################################################################
 # FUNCTION:
-# 	read_code_book
+# 	read_labels
 # PURPOSE:
 #	Reads the features from the features.txt file features that 
 #	match the supplied regular expression, and the activity labels
@@ -121,7 +109,7 @@ download_data <- function (url, dir, file=DEST_FILE) {
 # 	The list of features and labes to be used when generating the 
 #   tidy data set.
 ###################################################################
-read_code_book <- function(path) {
+read_labels <- function(path) {
 	# Read the features from the features.txt file
 	features <- read.table(file.path(path, FEATURES), col.names = c("value", "name"))
 
@@ -129,7 +117,7 @@ read_code_book <- function(path) {
     labels <- read.table(file.path(path, LABELS), col.name = c("value", "name"))
 
     # Return the featurs and the labels as a list
-	list(features=as.character(features$name), labels=as.character(labels$name))
+	list(features=as.character(features$name), activities=as.character(labels$name))
 }
 
 ###################################################################
@@ -143,7 +131,7 @@ read_code_book <- function(path) {
 #		   sets. 
 #	features - The names of each of the features contained in the 
 #	           feature vectors. These are read from the code book
-#			   by read_code_book.
+#			   by read_labels.
 # OUTPUTS:
 # 	A single data table containing all data from both the test and 
 #	train data set. The returned data table has all columns 
@@ -178,13 +166,13 @@ merge_data <- function (path, features) {
 #		   appropriately labeled.
 #	features - The names of each of the features contained in the 
 #	           feature vectors. These are read from the code book
-#			   by read_code_book.
+#			   by read_labels.
 # OUTPUTS:
 # 	A single data table containing the activities, the subjects, 
 #	and only those features columns related to mean() or std(). 
 ###################################################################
 extract_data <- function (data, features) {
-	# Detemrine those featurs that are related to mean() or std()
+	# Determine those features that are related to mean() or std()
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
 
 	# Extract those features, along with the activity and subject
@@ -203,7 +191,7 @@ extract_data <- function (data, features) {
 #		   is returned by a call to extract_data().
 #	features - The names of each of the features contained in the 
 #	           feature vectors. These are read from the code book
-#			   by read_code_book.
+#			   by read_labels.
 # OUTPUTS:
 # 	A single data table containing the activities, the subjects, 
 #	and only those features columns related to mean() or std(). 
@@ -216,6 +204,27 @@ tidy_data <- function(data, labels) {
 	group_by(data, activity, subject) %>% summarise_each(funs(mean))
 }
 
+###################################################################
+# FUNCTION:
+# 	generate_code_book
+# PURPOSE:
+#	Generates the code book for the tidy data set 
+# INPUTS:
+#	features - Featue name to be included in the code book.
+# OUTPUTS:
+# 	A data table containing the variable name and descriptions. 
+###################################################################
+generate_code_book <- function(features) {
+	code_book <- c("# DESCRIPTION: Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset",
+			   sprintf("## DATA SOURCE: %s", DATA_URL),
+			   sprintf("## GENERATED: %s", format(Sys.time(), "%a %b %d %X %Y")), 
+			   "activity: The activity being conducted when the observation was made.", 
+			   "subject: The subject conducting the activity when the observation was made.")
+	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
+	codes <- sapply(features[indices], function(feature) { sprintf("%s: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	code_book <- c(code_book, codes)
+
+}
 
 ###################################################################
 # FUNCTION:
@@ -229,22 +238,27 @@ tidy_data <- function(data, labels) {
 # OUTPUTS:
 # 	The full path to the file containing the data.
 ###################################################################
-output_data <- function(dir, name, data) {
+output_data <- function(dir, data_name, data, code_name, code_book) {
 	# Create the output directory if it does not exist
 	if (!file.exists(dir)) {
 		dir.create(dir)
 	}
 
-	# Initialize the file name
-	file_path <- file.path(dir, name)
+	# Initialize the data file name
+	data_path <- file.path(dir, data_name)
 
 	# Write the data set to the file
-	write.table(data, file_path, row.name=FALSE)
+	write.table(data, data_path, row.name=FALSE)
+
+	# Initialize the codd book file name
+	code_path <- file.path(dir, code_name)
+
+	# Write the code cook to the file
+	writeLines(code_book, code_path)
 
 	# Return the path to the file
-	file_path
+	data_path
 }
-
 
 ###################################################################
 # FUNCTION:
@@ -261,21 +275,24 @@ run_analysis <- function () {
 	# Download the dataset if necessary.
 	path <- download_data(DATA_URL, DATA_DIR)
 
-	# Read the features to be extracted from the features file. 
-	code_book <- read_code_book(path)
+	# Read the feature labels and the activity labels 
+	labels <- read_labels(path)
 
 	# Merge the test and train data sets
-	merged_data <- merge_data(path, code_book$features)
+	merged_data <- merge_data(path, labels$features)
 
 	# Extract the column related to mean() and std()
-	extracted_data <- extract_data(merged_data, code_book$features)
+	extracted_data <- extract_data(merged_data, labels$features)
 
 	# Tidy the data by computing means, assigning column names, 
-	# and labeling activities with meaningful labels
-	tidyed_data <- tidy_data(extracted_data, code_book$labels)
+	# and labeling activities with meaningful labels.
+	tidyed_data <- tidy_data(extracted_data, labels$activities)
+
+	# Generate the code book for the tidy data set
+	code_book <- generate_code_book(labels$features)
 
 	# Write the resulting data set to a file
-	output_path <- output_data(OUTPUT_DIR, OUTPUT_FILE, tidyed_data)
+	output_path <- output_data(OUTPUT_DIR, OUTPUT_FILE, tidyed_data, CODE_BOOK_FILE, code_book)
 }
 
 
