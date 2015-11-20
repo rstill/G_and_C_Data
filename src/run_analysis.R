@@ -216,8 +216,8 @@ tidy_data <- function(data, labels) {
 ###################################################################
 generate_code_book <- function(features) {
 	code_book <- c("## Code book for the data derived from the UCI HAR Dataset",
-				   "### Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation.",
-				   "### The columns for each observation are as follows.",
+				   "### _Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation._",
+				   "### _The columns for each observation are as follows._",
 			   	   "* __activity__: The activity being conducted when the observation was made.\n", 
 			       "* __subject__: The subject conducting the activity when the observation was made.\n")
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
