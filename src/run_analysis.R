@@ -214,15 +214,15 @@ tidy_data <- function(data, labels) {
 # OUTPUTS:
 # 	A data table containing the variable name and descriptions. 
 ###################################################################
-generate_code_book <- function(features) {
+generate_code_book <- function(labels) {
 	code_book <- c("## Code book for the data derived from the UCI HAR Dataset.",
 				   "#### _This data presented has been created by merging the data from the test and train data sets, extracting all mean and standard deviation related features, summarized, and filnally output with readable activity labels._",
 				   "#### _Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation._",
 				   "#### _The columns for each observation are as follows._",
 			   	   "* __activity__: The activity being conducted when the observation was made.", 
 			       "* __subject__: The subject conducting the activity when the observation was made.")
-	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
-	codes <- sapply(features[indices], function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	indices <- sort(c(grep("-mean()", labels, fixed=TRUE), grep("-std()", labels, fixed=TRUE)))
+	codes <- sapply(labels[indices], function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
 
 }
@@ -290,7 +290,7 @@ run_analysis <- function () {
 	tidyed_data <- tidy_data(extracted_data, labels$activities)
 
 	# Generate the code book for the tidy data set
-	code_book <- generate_code_book(labels$features)
+	code_book <- generate_code_book(labels)
 
 	# Write the resulting data set to a file
 	output_path <- output_data(OUTPUT_DIR, OUTPUT_FILE, tidyed_data, CODE_BOOK_FILE, code_book)
