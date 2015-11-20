@@ -1,12 +1,12 @@
 
 # How the Script Works
-## Per the course instructions, this script, from the test and train data sets, creates a 
-## single, tidy data set, containing the avearge of each extracted variable for each activity 
-## and each subject. It accomplished this bby doing the following. 
+Per the course instructions, this script, from the test and train data sets, creates a 
+single, tidy data set, containing the avearge of each extracted variable for each activity 
+and each subject. It accomplished this bby doing the following. 
  1. The dataset is downloaded and unzipped by the function download_data(). Directories are
 	 created as needed.
  2. The feature names and activity labels are read from the code book files via the function 
-	 read_codes().
+	 read_labels().
  3. The train and test dataset files are loaded and merged into a single data table via the
 	 function merge_date(). 
  4. The function extract_Data(0 is used to create a data table containing only those 
