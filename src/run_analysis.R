@@ -198,7 +198,7 @@ extract_data <- function (data, labels) {
 ###################################################################
 tidy_data <- function(data, labels) {
 	# Provide readable activity labels
-	for (i in seq_along(labels)) { data$activity[data$activity==i] <- labels[i] }
+	for (i in seq_along(labels$activities)) { data$activity[data$activity==i] <- labels$activities[i] }
 
 	# Compute the column means, grouped by activity and subject
 	group_by(data, activity, subject) %>% summarise_each(funs(mean))
@@ -221,8 +221,8 @@ generate_code_book <- function(labels) {
 				   "#### _The columns for each observation are as follows._",
 			   	   "* __activity__: The activity being conducted when the observation was made.", 
 			       "* __subject__: The subject conducting the activity when the observation was made.")
-	indices <- sort(c(grep("-mean()", labels, fixed=TRUE), grep("-std()", labels, fixed=TRUE)))
-	codes <- sapply(labels[indices], function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	indices <- sort(c(grep("-mean()", labels$features, fixed=TRUE), grep("-std()", labels$features, fixed=TRUE)))	
+	codes <- sapply(labels$features[indices], function(label) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", label, label) })
 	code_book <- c(code_book, codes)
 
 }
@@ -287,7 +287,7 @@ run_analysis <- function () {
 
 	# Tidy the data by computing means, assigning column names, 
 	# and labeling activities with meaningful labels.
-	tidyed_data <- tidy_data(extracted_data, labels$activities)
+	tidyed_data <- tidy_data(extracted_data, labels)
 
 	# Generate the code book for the tidy data set
 	code_book <- generate_code_book(labels)
