@@ -173,7 +173,7 @@ merge_data <- function (path, features) {
 ###################################################################
 extract_data <- function (data, features) {
 	# Determine those features that are related to mean() or std()
-	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
+	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))	
 
 	# Extract those features, along with the activity and subject
 	data[,c("activity", "subject", features[indices])]
@@ -215,13 +215,11 @@ tidy_data <- function(data, labels) {
 # 	A data table containing the variable name and descriptions. 
 ###################################################################
 generate_code_book <- function(features) {
-	code_book <- c("# DESCRIPTION: Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset",
-			   sprintf("## DATA SOURCE: %s", DATA_URL),
-			   sprintf("## GENERATED: %s", format(Sys.time(), "%a %b %d %X %Y")), 
-			   "activity: The activity being conducted when the observation was made.", 
-			   "subject: The subject conducting the activity when the observation was made.")
+	code_book <- c("# Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset",
+			   	   "* _activity_: The activity being conducted when the observation was made.\n", 
+			       "* _subject_: The subject conducting the activity when the observation was made.\n")
 	indices <- sort(c(grep("-mean()", features, fixed=TRUE), grep("-std()", features, fixed=TRUE)))
-	codes <- sapply(features[indices], function(feature) { sprintf("%s: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	codes <- sapply(features[indices], function(feature) { sprintf("* _%s_: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
 
 }

@@ -1,71 +1,71 @@
-# DESCRIPTION: Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset
-## DATA SOURCE: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-## GENERATED: Thu Nov 19 19:18:28 2015
-activity: The activity being conducted when the observation was made.
-subject: The subject conducting the activity when the observation was made.
-tBodyAcc-mean()-X: Mean of tBodyAcc-mean()-X for all observations of the activity conducted by the indicated subject.
-tBodyAcc-mean()-Y: Mean of tBodyAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
-tBodyAcc-mean()-Z: Mean of tBodyAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
-tBodyAcc-std()-X: Mean of tBodyAcc-std()-X for all observations of the activity conducted by the indicated subject.
-tBodyAcc-std()-Y: Mean of tBodyAcc-std()-Y for all observations of the activity conducted by the indicated subject.
-tBodyAcc-std()-Z: Mean of tBodyAcc-std()-Z for all observations of the activity conducted by the indicated subject.
-tGravityAcc-mean()-X: Mean of tGravityAcc-mean()-X for all observations of the activity conducted by the indicated subject.
-tGravityAcc-mean()-Y: Mean of tGravityAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
-tGravityAcc-mean()-Z: Mean of tGravityAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
-tGravityAcc-std()-X: Mean of tGravityAcc-std()-X for all observations of the activity conducted by the indicated subject.
-tGravityAcc-std()-Y: Mean of tGravityAcc-std()-Y for all observations of the activity conducted by the indicated subject.
-tGravityAcc-std()-Z: Mean of tGravityAcc-std()-Z for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-mean()-X: Mean of tBodyAccJerk-mean()-X for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-mean()-Y: Mean of tBodyAccJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-mean()-Z: Mean of tBodyAccJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-std()-X: Mean of tBodyAccJerk-std()-X for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-std()-Y: Mean of tBodyAccJerk-std()-Y for all observations of the activity conducted by the indicated subject.
-tBodyAccJerk-std()-Z: Mean of tBodyAccJerk-std()-Z for all observations of the activity conducted by the indicated subject.
-tBodyGyro-mean()-X: Mean of tBodyGyro-mean()-X for all observations of the activity conducted by the indicated subject.
-tBodyGyro-mean()-Y: Mean of tBodyGyro-mean()-Y for all observations of the activity conducted by the indicated subject.
-tBodyGyro-mean()-Z: Mean of tBodyGyro-mean()-Z for all observations of the activity conducted by the indicated subject.
-tBodyGyro-std()-X: Mean of tBodyGyro-std()-X for all observations of the activity conducted by the indicated subject.
-tBodyGyro-std()-Y: Mean of tBodyGyro-std()-Y for all observations of the activity conducted by the indicated subject.
-tBodyGyro-std()-Z: Mean of tBodyGyro-std()-Z for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-mean()-X: Mean of tBodyGyroJerk-mean()-X for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-mean()-Y: Mean of tBodyGyroJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-mean()-Z: Mean of tBodyGyroJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-std()-X: Mean of tBodyGyroJerk-std()-X for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-std()-Y: Mean of tBodyGyroJerk-std()-Y for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerk-std()-Z: Mean of tBodyGyroJerk-std()-Z for all observations of the activity conducted by the indicated subject.
-tBodyAccMag-mean(): Mean of tBodyAccMag-mean() for all observations of the activity conducted by the indicated subject.
-tBodyAccMag-std(): Mean of tBodyAccMag-std() for all observations of the activity conducted by the indicated subject.
-tGravityAccMag-mean(): Mean of tGravityAccMag-mean() for all observations of the activity conducted by the indicated subject.
-tGravityAccMag-std(): Mean of tGravityAccMag-std() for all observations of the activity conducted by the indicated subject.
-tBodyAccJerkMag-mean(): Mean of tBodyAccJerkMag-mean() for all observations of the activity conducted by the indicated subject.
-tBodyAccJerkMag-std(): Mean of tBodyAccJerkMag-std() for all observations of the activity conducted by the indicated subject.
-tBodyGyroMag-mean(): Mean of tBodyGyroMag-mean() for all observations of the activity conducted by the indicated subject.
-tBodyGyroMag-std(): Mean of tBodyGyroMag-std() for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerkMag-mean(): Mean of tBodyGyroJerkMag-mean() for all observations of the activity conducted by the indicated subject.
-tBodyGyroJerkMag-std(): Mean of tBodyGyroJerkMag-std() for all observations of the activity conducted by the indicated subject.
-fBodyAcc-mean()-X: Mean of fBodyAcc-mean()-X for all observations of the activity conducted by the indicated subject.
-fBodyAcc-mean()-Y: Mean of fBodyAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
-fBodyAcc-mean()-Z: Mean of fBodyAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
-fBodyAcc-std()-X: Mean of fBodyAcc-std()-X for all observations of the activity conducted by the indicated subject.
-fBodyAcc-std()-Y: Mean of fBodyAcc-std()-Y for all observations of the activity conducted by the indicated subject.
-fBodyAcc-std()-Z: Mean of fBodyAcc-std()-Z for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-mean()-X: Mean of fBodyAccJerk-mean()-X for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-mean()-Y: Mean of fBodyAccJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-mean()-Z: Mean of fBodyAccJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-std()-X: Mean of fBodyAccJerk-std()-X for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-std()-Y: Mean of fBodyAccJerk-std()-Y for all observations of the activity conducted by the indicated subject.
-fBodyAccJerk-std()-Z: Mean of fBodyAccJerk-std()-Z for all observations of the activity conducted by the indicated subject.
-fBodyGyro-mean()-X: Mean of fBodyGyro-mean()-X for all observations of the activity conducted by the indicated subject.
-fBodyGyro-mean()-Y: Mean of fBodyGyro-mean()-Y for all observations of the activity conducted by the indicated subject.
-fBodyGyro-mean()-Z: Mean of fBodyGyro-mean()-Z for all observations of the activity conducted by the indicated subject.
-fBodyGyro-std()-X: Mean of fBodyGyro-std()-X for all observations of the activity conducted by the indicated subject.
-fBodyGyro-std()-Y: Mean of fBodyGyro-std()-Y for all observations of the activity conducted by the indicated subject.
-fBodyGyro-std()-Z: Mean of fBodyGyro-std()-Z for all observations of the activity conducted by the indicated subject.
-fBodyAccMag-mean(): Mean of fBodyAccMag-mean() for all observations of the activity conducted by the indicated subject.
-fBodyAccMag-std(): Mean of fBodyAccMag-std() for all observations of the activity conducted by the indicated subject.
-fBodyBodyAccJerkMag-mean(): Mean of fBodyBodyAccJerkMag-mean() for all observations of the activity conducted by the indicated subject.
-fBodyBodyAccJerkMag-std(): Mean of fBodyBodyAccJerkMag-std() for all observations of the activity conducted by the indicated subject.
-fBodyBodyGyroMag-mean(): Mean of fBodyBodyGyroMag-mean() for all observations of the activity conducted by the indicated subject.
-fBodyBodyGyroMag-std(): Mean of fBodyBodyGyroMag-std() for all observations of the activity conducted by the indicated subject.
-fBodyBodyGyroJerkMag-mean(): Mean of fBodyBodyGyroJerkMag-mean() for all observations of the activity conducted by the indicated subject.
-fBodyBodyGyroJerkMag-std(): Mean of fBodyBodyGyroJerkMag-std() for all observations of the activity conducted by the indicated subject.
+# Code Book for the data derived from the Human Activity Recognition Using Smartphones dataset
+* _activity_: The activity being conducted when the observation was made.
+
+* _subject_: The subject conducting the activity when the observation was made.
+
+* _tBodyAcc-mean()-X_: Mean of tBodyAcc-mean()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyAcc-mean()-Y_: Mean of tBodyAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyAcc-mean()-Z_: Mean of tBodyAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyAcc-std()-X_: Mean of tBodyAcc-std()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyAcc-std()-Y_: Mean of tBodyAcc-std()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyAcc-std()-Z_: Mean of tBodyAcc-std()-Z for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-mean()-X_: Mean of tGravityAcc-mean()-X for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-mean()-Y_: Mean of tGravityAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-mean()-Z_: Mean of tGravityAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-std()-X_: Mean of tGravityAcc-std()-X for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-std()-Y_: Mean of tGravityAcc-std()-Y for all observations of the activity conducted by the indicated subject.
+* _tGravityAcc-std()-Z_: Mean of tGravityAcc-std()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-mean()-X_: Mean of tBodyAccJerk-mean()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-mean()-Y_: Mean of tBodyAccJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-mean()-Z_: Mean of tBodyAccJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-std()-X_: Mean of tBodyAccJerk-std()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-std()-Y_: Mean of tBodyAccJerk-std()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerk-std()-Z_: Mean of tBodyAccJerk-std()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-mean()-X_: Mean of tBodyGyro-mean()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-mean()-Y_: Mean of tBodyGyro-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-mean()-Z_: Mean of tBodyGyro-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-std()-X_: Mean of tBodyGyro-std()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-std()-Y_: Mean of tBodyGyro-std()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyGyro-std()-Z_: Mean of tBodyGyro-std()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-mean()-X_: Mean of tBodyGyroJerk-mean()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-mean()-Y_: Mean of tBodyGyroJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-mean()-Z_: Mean of tBodyGyroJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-std()-X_: Mean of tBodyGyroJerk-std()-X for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-std()-Y_: Mean of tBodyGyroJerk-std()-Y for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerk-std()-Z_: Mean of tBodyGyroJerk-std()-Z for all observations of the activity conducted by the indicated subject.
+* _tBodyAccMag-mean()_: Mean of tBodyAccMag-mean() for all observations of the activity conducted by the indicated subject.
+* _tBodyAccMag-std()_: Mean of tBodyAccMag-std() for all observations of the activity conducted by the indicated subject.
+* _tGravityAccMag-mean()_: Mean of tGravityAccMag-mean() for all observations of the activity conducted by the indicated subject.
+* _tGravityAccMag-std()_: Mean of tGravityAccMag-std() for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerkMag-mean()_: Mean of tBodyAccJerkMag-mean() for all observations of the activity conducted by the indicated subject.
+* _tBodyAccJerkMag-std()_: Mean of tBodyAccJerkMag-std() for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroMag-mean()_: Mean of tBodyGyroMag-mean() for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroMag-std()_: Mean of tBodyGyroMag-std() for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerkMag-mean()_: Mean of tBodyGyroJerkMag-mean() for all observations of the activity conducted by the indicated subject.
+* _tBodyGyroJerkMag-std()_: Mean of tBodyGyroJerkMag-std() for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-mean()-X_: Mean of fBodyAcc-mean()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-mean()-Y_: Mean of fBodyAcc-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-mean()-Z_: Mean of fBodyAcc-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-std()-X_: Mean of fBodyAcc-std()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-std()-Y_: Mean of fBodyAcc-std()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyAcc-std()-Z_: Mean of fBodyAcc-std()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-mean()-X_: Mean of fBodyAccJerk-mean()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-mean()-Y_: Mean of fBodyAccJerk-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-mean()-Z_: Mean of fBodyAccJerk-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-std()-X_: Mean of fBodyAccJerk-std()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-std()-Y_: Mean of fBodyAccJerk-std()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyAccJerk-std()-Z_: Mean of fBodyAccJerk-std()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-mean()-X_: Mean of fBodyGyro-mean()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-mean()-Y_: Mean of fBodyGyro-mean()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-mean()-Z_: Mean of fBodyGyro-mean()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-std()-X_: Mean of fBodyGyro-std()-X for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-std()-Y_: Mean of fBodyGyro-std()-Y for all observations of the activity conducted by the indicated subject.
+* _fBodyGyro-std()-Z_: Mean of fBodyGyro-std()-Z for all observations of the activity conducted by the indicated subject.
+* _fBodyAccMag-mean()_: Mean of fBodyAccMag-mean() for all observations of the activity conducted by the indicated subject.
+* _fBodyAccMag-std()_: Mean of fBodyAccMag-std() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyAccJerkMag-mean()_: Mean of fBodyBodyAccJerkMag-mean() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyAccJerkMag-std()_: Mean of fBodyBodyAccJerkMag-std() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyGyroMag-mean()_: Mean of fBodyBodyGyroMag-mean() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyGyroMag-std()_: Mean of fBodyBodyGyroMag-std() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyGyroJerkMag-mean()_: Mean of fBodyBodyGyroJerkMag-mean() for all observations of the activity conducted by the indicated subject.
+* _fBodyBodyGyroJerkMag-std()_: Mean of fBodyBodyGyroJerkMag-std() for all observations of the activity conducted by the indicated subject.
