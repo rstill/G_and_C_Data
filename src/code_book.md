@@ -1,4 +1,6 @@
 ## Code book for the data derived from the UCI HAR Dataset
+### Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation.
+### The columns for each observation are as follows.
 * __activity__: The activity being conducted when the observation was made.
 
 * __subject__: The subject conducting the activity when the observation was made.
