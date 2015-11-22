@@ -11,5 +11,5 @@ and each subject. It accomplished this bby doing the following.
 	 function merge_data(). 
  4. For those columns containing mean() or std(), the resulting data table is summarised by mean, 
  	and activity labels are applied via the function tidy_data().
- 5. The code book for the resulting data set is generated via fht function generate_code_book().
+ 5. The code book for the resulting data set is generated via the function generate_code_book().
  6. This resulting data set and code book is then written to a file by the function output_data().
