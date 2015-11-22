@@ -154,44 +154,17 @@ merge_data <- function (path, labels) {
 
 ###################################################################
 # FUNCTION:
-# 	extract_data
-# PURPOSE:
-#	Extracts those columns from the the combined data set the
-#	are related to either mean() or std().
-# INPUTS:
-#	data - Data table from with the columns should be extracted.
-#		   It is assumed that this data table is the one returned 
-#		   by a call to merge_data() and therefore contains all 
-#		   test and train data as wll as having all columns  
-#		   appropriately labeled.
-#	features - The names of each of the features contained in the 
-#	           feature vectors. These are read from the code book
-#			   by read_labels.
-# OUTPUTS:
-# 	A single data table containing the activities, the subjects, 
-#	and only those features columns related to mean() or std(). 
-###################################################################
-extract_data <- function (data, labels) {
-	# Determine those features that are related to mean() or std()
-	indices <- sort(c(grep("-mean()", labels$features, fixed=TRUE), grep("-std()", labels$features, fixed=TRUE)))	
-
-	# Extract those features, along with the activity and subject
-	data[,c("activity", "subject", labels$features[indices])]
-}
-
-###################################################################
-# FUNCTION:
 # 	tidy_data
 # PURPOSE:
 #	Labels activities with a readable name, groups the data by 
 #   activity and subject, and summarises each of the features 
-#   by mean. 
+#   by mean for columns containing mean() or std(). 
 # INPUTS:
 #	data - Data table to be tidyed. It is assumed that this data 
-#		   is returned by a call to extract_data().
-#	features - The names of each of the features contained in the 
-#	           feature vectors. These are read from the code book
-#			   by read_labels.
+#		   is returned by a call to merge_data().
+#	labels - The names of each of the features contained in the 
+#	         feature vectors. These are read from the code book
+#			 by read_labels.
 # OUTPUTS:
 # 	A single data table containing the activities, the subjects, 
 #	and only those features columns related to mean() or std(). 
@@ -201,7 +174,7 @@ tidy_data <- function(data, labels) {
 	for (i in seq_along(labels$activities)) { data$activity[data$activity==i] <- labels$activities[i] }
 
 	# Compute the column means, grouped by activity and subject
-	group_by(data, activity, subject) %>% summarise_each(funs(mean))
+	group_by(data, activity, subject) %>% summarise_each(funs(mean), contains("mean()"), contains("std()"))
 }
 
 ###################################################################
@@ -214,15 +187,16 @@ tidy_data <- function(data, labels) {
 # OUTPUTS:
 # 	A data table containing the variable name and descriptions. 
 ###################################################################
-generate_code_book <- function(labels) {
+generate_code_book <- function(data, labels) {
 	code_book <- c("## Code book for the data derived from the UCI HAR Dataset.",
 				   "#### _This data presented has been created by merging the data from the test and train data sets, extracting all mean and standard deviation related features, summarized, and filnally output with readable activity labels._",
-				   "#### _Each observation consists of the activity measured, the subject conducting the activity measuredm as well as the means of all measurements involving either mean or standard deviation._",
+				   "#### _Each observation consists of the activity measured, the subject conducting the activity measured as well as the means of all measurements involving either mean or standard deviation._",
 				   "#### _The columns for each observation are as follows._",
 			   	   "* __activity__: The activity being conducted when the observation was made.", 
 			       "* __subject__: The subject conducting the activity when the observation was made.")
-	indices <- sort(c(grep("-mean()", labels$features, fixed=TRUE), grep("-std()", labels$features, fixed=TRUE)))	
-	codes <- sapply(labels$features[indices], function(label) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", label, label) })
+	features <- names(data)
+	features <- features[!features %in% c("activity", "subject")]
+	codes <- sapply(features, function(feature) { sprintf("* __%s__: Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
 
 }
@@ -282,15 +256,12 @@ run_analysis <- function () {
 	# Merge the test and train data sets
 	merged_data <- merge_data(path, labels)
 
-	# Extract the column related to mean() and std()
-	extracted_data <- extract_data(merged_data, labels)
-
 	# Tidy the data by computing means, assigning column names, 
 	# and labeling activities with meaningful labels.
-	tidyed_data <- tidy_data(extracted_data, labels)
+	tidyed_data <- tidy_data(merged_data, labels)
 
 	# Generate the code book for the tidy data set
-	code_book <- generate_code_book(labels)
+	code_book <- generate_code_book(tidyed_data, labels)
 
 	# Write the resulting data set to a file
 	output_path <- output_data(OUTPUT_DIR, OUTPUT_FILE, tidyed_data, CODE_BOOK_FILE, code_book)
