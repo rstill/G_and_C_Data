@@ -193,17 +193,15 @@ generate_code_book <- function(data, labels) {
 	code_book <- c("## Code book for the data derived from the UCI HAR Dataset.",
 				   "#### This data presented has been created by merging the data from the test and train data sets, extracting all mean and standard deviation related features, summarized, and finally output with readable activity labels.",
 				   "#### Each observation consists of the activity measured, the subject conducting the activity measured as well as the means of all measurements involving either a mean or standard deviation.",
-				   "#### The following quotation, take in full from the source data (see features_info,txt), describes how time related features were both generated and sampled.",
+				   "#### The following quotation, take in full from the source data (see features_info.txt), describes how time related features were both generated and sampled.",
 				   "_The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz._",
 				   "_Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag)._",
-				   "_Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals)._", 
-				   "_These signals were used to estimate variables of the feature vector for each pattern._",
 				   "#### The columns for each observation are as follows.",
 			   	   "* __activity__ -- The activity being conducted when the observation was made.", 
 			       "* __subject__ -- The subject conducting the activity when the observation was made.")
 	features <- names(data)
 	features <- features[!features %in% c("activity", "subject")]
-	codes <- sapply(features, function(feature) { sprintf("* __%s__ -- Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
+	codes <- sapply(features, function(feature) { sprintf("* __%s.__ Mean of %s for all observations of the activity conducted by the indicated subject.", feature, feature) })
 	code_book <- c(code_book, codes)
 
 }
